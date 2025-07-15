@@ -1,0 +1,11 @@
+site_name: Cosmos Doc  
+theme:
+  name: material  
+  features:
+    - navigation.sections  
+nav:  
+  - Index: index.md
+  - Overview: overview.md
+  - Installation and Setup: installation.md
+  - Backend Configuration: backend.md  
+  - Frontend UI Configuration: frontend.md  
