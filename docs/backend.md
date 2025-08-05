@@ -1,3 +1,6 @@
+# This part will be update once the backend is finished
+
+
 # Backend Setup and Configuration
 This section guides you through the modification and configuration of Cosmos backend.
 

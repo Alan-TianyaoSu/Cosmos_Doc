@@ -2,7 +2,7 @@
 This section guides you through the installation and setup of Cosmos.
 
 ### Prerequisites
-- Python 3.8 or higher
+- Python 3.12 or higher
 - Operating System: Windows
 - Memory: Minimum 8GB RAM (16GB+ recommended)
 - Storage: 80GB+ of storage space is required for compiling the Brave and Chromium engines.
@@ -26,12 +26,25 @@ https://nodejs.org/en/download
 #### 2. Install Brave browser
 
 ```
-# Install via git clone
+# Install via git clone (* Important: must create /src/brave in your folder)
+git clone https://github.com/brave/brave-core.git Your-Project-Path/src/brave
 
-git clone git@github.com:brave/brave-core.git path-to-your-project-folder/src/brave
 
+# All the Command should be run in /src/brave
 cd path-to-your-project-folder/src/brave
 
+
+# Install depot_tools
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+
+# Set depot_tools in system path
+export PATH="$PWD/depot_tools:$PATH"        # For Linux/MacOS
+set PATH=%CD%\depot_tools;%PATH%            # For Windows cmd
+$env:PATH = "$PWD\depot_tools;$env:PATH"    # For Windows Power Shell
+
+
+# Start Installation
 npm install
 
 # the Chromium source is downloaded, which has a large history (gigabytes of data)
@@ -47,7 +60,7 @@ npm run init
 # start the component build compile
 npm run build
 
-# start the release compile (different from build, not needed until finished)
+# start the release compile (different from build, not needed until development finished)
 npm run build Release
 ```
 
@@ -64,27 +77,17 @@ npm start -- --enable-logging=stderr
 ```
 
 
-#### 5. Install Blackbird SDK
+#### 5. Install Backend (will be filled)
 
 ```
-# Install from source (development)
-git clone [repository link to be added here]
-
-## for mac users :
-pip install -r requirements_mac_updated.txt
-
-## for windows users
-cd blackbird_sdk
-
-# install the requirements
-pip install -r requirements.txt
-pip install -e .
-# Or install from PyPI (when available)pip install blackbird-sdk
+  
 ```
 
 ### File Structure
 
 After you finish Brave compiling and Blackbird SDK installation, structure your files like this:
+
+** will be changed later **
 
 ```
 project_root/

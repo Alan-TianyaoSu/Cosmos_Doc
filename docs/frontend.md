@@ -18,12 +18,20 @@ This section guides you through the modification and configuration of Cosmos Fro
 #### 1. Front file location 
 
 ```
-project_root/                  # Project root 
-└── src/                       # Source code directory
-    └── brave/                 # Brave core main directory (core functionality and components)
-        └── browser/           # Browser-specific folder (contains frontend bindings)
-            ├── brave_browser_main_extra_parts.h   # Frontend binding header file (extra parts definitions)
-            └── brave_browser_main_extra_parts.cc  # Frontend binding source file (implements extra parts logic)
+# For Frontend UI
+project_root/                                           # Root directory of the Brave custom project
+└── src/                                                
+    └── brave/                                          
+        └── browser/                                    
+            ├── brave_browser_main_extra_parts.h        # Header file for additional Brave-specific browser startup logic
+            ├── brave_browser_main_extra_parts.cc       # Source file implementing the Brave-specific startup logic
+            └── ui/                                     
+                └── views/                              
+                    └── toolbar/                        
+                        ├── brave_toolbar_view.h        # Header file declaring BraveToolbarView with AI Mode button
+                        └── brave_toolbar_view.cc       # Source file implementing BraveToolbarView and AI Mode logic
+                    └── location_bar/                   
+                        └── brave_location_bar_view.cc  # Modified source file: Brave logo removed from location bar
 ```
 
 <br>
@@ -34,22 +42,7 @@ project_root/                  # Project root
 
 ```
 class BlackBirdView : public views::View {
- public:
-  BlackBirdView();
-  ~BlackBirdView() override; 
-
-  void Show();
-  void OnSendPressed();
-  void AppendOutput(const std::string& line);
-  void UpdateOutputWithFinalResponse(const std::string& final_text);
-  void LaunchWebFetchWindow(const std::string& json_str);
-  
-
- private:
-  raw_ptr<views::Label> output_label_ = nullptr;
-  raw_ptr<views::Textfield> input_ = nullptr;
-
-  base::WeakPtrFactory<BlackBirdView> weak_factory_{this};
+    ...
 };
 ```
 
