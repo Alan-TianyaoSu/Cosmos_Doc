@@ -16,7 +16,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -343,9 +343,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-install-blackbird-sdk" class="md-nav__link">
+  <a href="#5-install-backend-will-be-filled" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Install Blackbird SDK
+      5. Install Backend (will be filled)
     </span>
   </a>
   
@@ -499,9 +499,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-install-blackbird-sdk" class="md-nav__link">
+  <a href="#5-install-backend-will-be-filled" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Install Blackbird SDK
+      5. Install Backend (will be filled)
     </span>
   </a>
   
@@ -541,7 +541,7 @@
 <p>This section guides you through the installation and setup of Cosmos.</p>
 <h3 id="prerequisites">Prerequisites</h3>
 <ul>
-<li>Python 3.8 or higher</li>
+<li>Python 3.12 or higher</li>
 <li>Operating System: Windows</li>
 <li>Memory: Minimum 8GB RAM (16GB+ recommended)</li>
 <li>Storage: 80GB+ of storage space is required for compiling the Brave and Chromium engines.</li>
@@ -557,12 +557,25 @@ npm --version  # Should show v8.x or higher
 https://nodejs.org/en/download
 </code></pre>
 <h4 id="2-install-brave-browser">2. Install Brave browser</h4>
-<pre><code># Install via git clone
+<pre><code># Install via git clone (* Important: must create /src/brave in your folder)
+git clone https://github.com/brave/brave-core.git Your-Project-Path/src/brave
 
-git clone git@github.com:brave/brave-core.git path-to-your-project-folder/src/brave
 
+# All the Command should be run in /src/brave
 cd path-to-your-project-folder/src/brave
 
+
+# Install depot_tools
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+
+
+# Set depot_tools in system path
+export PATH=&quot;$PWD/depot_tools:$PATH&quot;        # For Linux/MacOS
+set PATH=%CD%\depot_tools;%PATH%            # For Windows cmd
+$env:PATH = &quot;$PWD\depot_tools;$env:PATH&quot;    # For Windows Power Shell
+
+
+# Start Installation
 npm install
 
 # the Chromium source is downloaded, which has a large history (gigabytes of data)
@@ -574,7 +587,7 @@ npm run init
 <pre><code># start the component build compile
 npm run build
 
-# start the release compile (different from build, not needed until finished)
+# start the release compile (different from build, not needed until development finished)
 npm run build Release
 </code></pre>
 <h4 id="4-after-compiling-start-the-browser">4. After Compiling, start the browser</h4>
@@ -585,23 +598,12 @@ npm start
 # This is useful for debugging or capturing logs in the terminal
 npm start -- --enable-logging=stderr
 </code></pre>
-<h4 id="5-install-blackbird-sdk">5. Install Blackbird SDK</h4>
-<pre><code># Install from source (development)
-git clone [repository link to be added here]
-
-## for mac users :
-pip install -r requirements_mac_updated.txt
-
-## for windows users
-cd blackbird_sdk
-
-# install the requirements
-pip install -r requirements.txt
-pip install -e .
-# Or install from PyPI (when available)pip install blackbird-sdk
+<h4 id="5-install-backend-will-be-filled">5. Install Backend (will be filled)</h4>
+<pre><code>#
 </code></pre>
 <h3 id="file-structure">File Structure</h3>
 <p>After you finish Brave compiling and Blackbird SDK installation, structure your files like this:</p>
+<p>** will be changed later **</p>
 <pre><code>project_root/
 ├── src/                  # Source code directory
 │   └── out/              # Output/build directory
@@ -668,7 +670,7 @@ pip install -e .
       <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
       
     
   </body>
