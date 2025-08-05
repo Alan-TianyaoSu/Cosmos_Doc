@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
     
     
       
@@ -22,7 +22,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
       
       
 
@@ -557,33 +557,26 @@
 </ul>
 <p><br></p>
 <h4 id="1-front-file-location">1. Front file location</h4>
-<pre><code>project_root/                  # Project root 
-└── src/                       # Source code directory
-    └── brave/                 # Brave core main directory (core functionality and components)
-        └── browser/           # Browser-specific folder (contains frontend bindings)
-            ├── brave_browser_main_extra_parts.h   # Frontend binding header file (extra parts definitions)
-            └── brave_browser_main_extra_parts.cc  # Frontend binding source file (implements extra parts logic)
+<pre><code># For Frontend UI
+project_root/                                           # Root directory of the Brave custom project
+└── src/                                                
+    └── brave/                                          
+        └── browser/                                    
+            ├── brave_browser_main_extra_parts.h        # Header file for additional Brave-specific browser startup logic
+            ├── brave_browser_main_extra_parts.cc       # Source file implementing the Brave-specific startup logic
+            └── ui/                                     
+                └── views/                              
+                    └── toolbar/                        
+                        ├── brave_toolbar_view.h        # Header file declaring BraveToolbarView with AI Mode button
+                        └── brave_toolbar_view.cc       # Source file implementing BraveToolbarView and AI Mode logic
+                    └── location_bar/                   
+                        └── brave_location_bar_view.cc  # Modified source file: Brave logo removed from location bar
 </code></pre>
 <p><br></p>
 <h4 id="2-frontend-ui-blackbird-view">2. Frontend UI Blackbird View</h4>
 <p>(<code>app\brave_browser_main_extra_parts.h</code> - Lines 31-64) </p>
 <pre><code>class BlackBirdView : public views::View {
- public:
-  BlackBirdView();
-  ~BlackBirdView() override; 
-
-  void Show();
-  void OnSendPressed();
-  void AppendOutput(const std::string&amp; line);
-  void UpdateOutputWithFinalResponse(const std::string&amp; final_text);
-  void LaunchWebFetchWindow(const std::string&amp; json_str);
-
-
- private:
-  raw_ptr&lt;views::Label&gt; output_label_ = nullptr;
-  raw_ptr&lt;views::Textfield&gt; input_ = nullptr;
-
-  base::WeakPtrFactory&lt;BlackBirdView&gt; weak_factory_{this};
+    ...
 };
 </code></pre>
 <p><br></p>
@@ -677,7 +670,7 @@ void BlackBirdView::LaunchWebFetchWindow(const std::string&amp; json_str) {
       <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
       
     
   </body>

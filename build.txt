@@ -1,0 +1,5 @@
+conda activate doc
+
+mkdocs build
+
+mkdocs gh-deploy
