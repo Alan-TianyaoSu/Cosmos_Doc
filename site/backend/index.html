@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#this-part-will-be-update-once-the-backend-is-finished" class="md-skip">
+        <a href="#backend-setup-and-configuration" class="md-skip">
           Skip to content
         </a>
       
@@ -269,6 +269,19 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Backend Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -280,6 +293,67 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backend-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend file Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend file Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-model-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Model Download
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-set-up-gemini-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Set Up Gemini API keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-start-foom-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Start foom backend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -327,6 +401,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backend-file-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backend file Structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backend file Structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-model-download" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Model Download
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-set-up-gemini-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Set Up Gemini API keys
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-start-foom-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Start foom backend
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -341,65 +465,48 @@
 
 
 
-<h1 id="this-part-will-be-update-once-the-backend-is-finished">This part will be update once the backend is finished</h1>
 <h1 id="backend-setup-and-configuration">Backend Setup and Configuration</h1>
-<p>This section guides you through the modification and configuration of Cosmos backend.</p>
-<h3 id="backend-file">Backend file</h3>
+<p>This section guides you through the modification and configuration of Foom backend.</p>
+<h3 id="backend-file-structure">Backend file Structure</h3>
+<pre><code>FOOM_BACKEND/
+├─ core/
+├─ deprecated/
+├─ HF_Model/
+├─ models/
+├─ routes/
+├─ services/
+├─ third_party/
+│  └─ client_secret.json         # Google OAuth 2.0 client credentials (from Google Cloud Console)
+├─ utils/
+├─ __init__.py
+├─ .env                          # Environment variables (includes Google OAuth + app settings)
+├─ backend.py                    # App factory / FastAPI-Flask backend entry (imports routes, services)
+├─ model_download.py             # Model downloader (Llama-3.1-8B-instruct-GGUF)
+├─ requirements.txt
+└─ start.py                      # Startup script
+</code></pre>
+<p><br></p>
+<h4 id="1-model-download">1. Model Download</h4>
 <ul>
-<li>
-<p>Based on the provided paths, starting from project_root/.</p>
-</li>
-<li>
-<p>Key highlights: Brave core main directory, frontend binding locations, and backend binding locations.</p>
-</li>
-<li>
-<p>Note: Frontend bindings are in browser/ subfolder, backend in app/ subfolder.</p>
-</li>
-<li>
-<p>Use this to navigate and understand file locations for development or building.</p>
-</li>
-<li>
-<p><strong>Try to avoid creating new .cc/.h files or modifying the BUILD.gn file whenever possible, as this can significantly increase compilation difficulty and lead to time-consuming build processes!</strong></p>
-</li>
+<li>First time running the backend, run the model downloader first. This will download the Llama 3.1-8B-Instruct model.</li>
 </ul>
-<p><br></p>
-<h4 id="1-backend-file-location">1. Backend file location</h4>
-<pre><code>project_root/                  # Project root 
-└── src/                       # Source code directory
-    └── brave/                 # Brave core main directory (core functionality and components)
-        └── app/               # Application folder (contains backend bindings)
-            ├── brave_main_delegate.h   # Backend binding header file (defines main delegate class)
-            └── brave_main_delegate.cc  # Backend binding source file (implements main delegate logic)
+<pre><code># cd foom_backend
+python model_download.py
 </code></pre>
-<p>Bind the backend startup command to the launch (brave_main_delegate) of the Brave browser. This is because <strong>initializing the Blackbird backend may take a significant amount of time</strong>. Possible future improvements include:</p>
+<p><br></p>
+<h4 id="2-set-up-gemini-api-keys">2. Set Up Gemini API keys</h4>
 <ul>
-<li>Running the backend in the background to speed up access when Cosmos is launched again.</li>
-<li>Tightly coupling the backend's lifecycle with the Brave main process, so it shuts down together with the Brave browser.</li>
+<li>Set GOOGLE_API_KEY= in the .env file to your API key.</li>
 </ul>
-<p><br></p>
-<h4 id="2-bravemaindelegate-binding">2. BraveMainDelegate binding</h4>
-<p>(<code>app\brave_main_delegate.h</code> - Lines 52-53) </p>
-<pre><code>base::Process python_backend_process_;  
-void PostMainMessageLoopRun();
+<pre><code>GOOGLE_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
 </code></pre>
 <p><br></p>
-<h4 id="3-backend-process-function">3. Backend process function</h4>
-<p>(<code>app\brave_main_delegate.cc</code> - Lines 237-286) </p>
-<pre><code>std::string process_type = command_line-&gt;GetSwitchValueASCII(switches::kProcessType);
-
-#....
-
-#endif
-
+<h4 id="3-start-foom-backend">3. Start foom backend</h4>
+<p>For starting backend, use start.py, this will start a fastapi process</p>
+<pre><code>python start.py
 </code></pre>
 <p><br></p>
-<h4 id="4-maintain-backend">4. Maintain backend</h4>
-<p>PostMainMessageLoopRun() function  (<code>app\brave_main_delegate.cc</code> - Lines 292-305) </p>
-<pre><code>void BraveMainDelegate::PostMainMessageLoopRun(){
-    ...
-}
-
-</code></pre>
 
 
 
