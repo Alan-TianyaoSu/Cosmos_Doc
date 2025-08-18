@@ -343,9 +343,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-install-backend-will-be-filled" class="md-nav__link">
+  <a href="#5-install-backend" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Install Backend (will be filled)
+      5. Install Backend
     </span>
   </a>
   
@@ -499,9 +499,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-install-backend-will-be-filled" class="md-nav__link">
+  <a href="#5-install-backend" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Install Backend (will be filled)
+      5. Install Backend
     </span>
   </a>
   
@@ -546,6 +546,7 @@
 <li>Memory: Minimum 8GB RAM (16GB+ recommended)</li>
 <li>Storage: 80GB+ of storage space is required for compiling the Brave and Chromium engines.</li>
 <li>Network: Internet connection for model downloads and web features</li>
+<li>Cuda 12.4 or higher</li>
 </ul>
 <h3 id="installation-steps">Installation Steps</h3>
 <h4 id="1-install-nodejs">1. Install Node.js</h4>
@@ -598,9 +599,44 @@ npm start
 # This is useful for debugging or capturing logs in the terminal
 npm start -- --enable-logging=stderr
 </code></pre>
-<h4 id="5-install-backend-will-be-filled">5. Install Backend (will be filled)</h4>
-<pre><code>#
+<h4 id="5-install-backend">5. Install Backend</h4>
+<pre><code># Create a new virtual environment (Python 3.12 is required)
+# Windows (PowerShell)
+python -m venv .venv
+
+# macOS/Linux
+python3.12 -m venv .venv
+
+
+
+# Activate the environment
+# Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+# Windows (CMD)
+.\.venv\Scripts\activate.bat
+
+# macOS/Linux (bash/zsh)
+source .venv/bin/activate
+
+
+
+# Navigate to the backend directory
+cd foom_backend
+
+
+
+# Install dependencies
+pip install --no-cache-dir -r requirements.txt
+
+
+
+# Install Playwright browser binaries (Chromium)
+playwright install chromium --with-deps --no-shell
 </code></pre>
+<p>Notes:
+- Ensure you are using Python 3.12 for the virtual environment.
+- On macOS/Linux, you may need to use python3.12 and pip3.12 if python points to another version.</p>
 <h3 id="file-structure">File Structure</h3>
 <p>After you finish Brave compiling and Blackbird SDK installation, structure your files like this:</p>
 <p>** will be changed later **</p>
