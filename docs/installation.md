@@ -7,6 +7,7 @@ This section guides you through the installation and setup of Cosmos.
 - Memory: Minimum 8GB RAM (16GB+ recommended)
 - Storage: 80GB+ of storage space is required for compiling the Brave and Chromium engines.
 - Network: Internet connection for model downloads and web features
+- Cuda 12.4 or higher
 
 ### Installation Steps
 
@@ -77,11 +78,47 @@ npm start -- --enable-logging=stderr
 ```
 
 
-#### 5. Install Backend (will be filled)
+#### 5. Install Backend
 
 ```
-#
+# Create a new virtual environment (Python 3.12 is required)
+# Windows (PowerShell)
+python -m venv .venv
+
+# macOS/Linux
+python3.12 -m venv .venv
+
+
+
+# Activate the environment
+# Windows (PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+# Windows (CMD)
+.\.venv\Scripts\activate.bat
+
+# macOS/Linux (bash/zsh)
+source .venv/bin/activate
+
+
+
+# Navigate to the backend directory
+cd foom_backend
+
+
+
+# Install dependencies
+pip install --no-cache-dir -r requirements.txt
+
+
+
+# Install Playwright browser binaries (Chromium)
+playwright install chromium --with-deps --no-shell
 ```
+
+Notes:
+- Ensure you are using Python 3.12 for the virtual environment.
+- On macOS/Linux, you may need to use python3.12 and pip3.12 if python points to another version.
 
 ### File Structure
 
