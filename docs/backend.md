@@ -1,76 +1,57 @@
-# This part will be update once the backend is finished
-
-
 # Backend Setup and Configuration
-This section guides you through the modification and configuration of Cosmos backend.
+This section guides you through the modification and configuration of Foom backend.
 
-### Backend file
-
-- Based on the provided paths, starting from project_root/.
-
-- Key highlights: Brave core main directory, frontend binding locations, and backend binding locations.
-
-- Note: Frontend bindings are in browser/ subfolder, backend in app/ subfolder.
-
-- Use this to navigate and understand file locations for development or building.
-
-- **Try to avoid creating new .cc/.h files or modifying the BUILD.gn file whenever possible, as this can significantly increase compilation difficulty and lead to time-consuming build processes!**
-
-<br>
-
-#### 1. Backend file location 
+### Backend file Structure
 
 ```
-project_root/                  # Project root 
-└── src/                       # Source code directory
-    └── brave/                 # Brave core main directory (core functionality and components)
-        └── app/               # Application folder (contains backend bindings)
-            ├── brave_main_delegate.h   # Backend binding header file (defines main delegate class)
-            └── brave_main_delegate.cc  # Backend binding source file (implements main delegate logic)
-```
-
-
-Bind the backend startup command to the launch (brave_main_delegate) of the Brave browser. This is because **initializing the Blackbird backend may take a significant amount of time**. Possible future improvements include:
-
-- Running the backend in the background to speed up access when Cosmos is launched again.
-- Tightly coupling the backend's lifecycle with the Brave main process, so it shuts down together with the Brave browser.
-
-
-<br>
-
-#### 2. BraveMainDelegate binding  
-
-(```app\brave_main_delegate.h``` - Lines 52-53) 
-
-```
-base::Process python_backend_process_;  
-void PostMainMessageLoopRun();
+FOOM_BACKEND/
+├─ core/
+├─ deprecated/
+├─ HF_Model/
+├─ models/
+├─ routes/
+├─ services/
+├─ third_party/
+│  └─ client_secret.json         # Google OAuth 2.0 client credentials (from Google Cloud Console)
+├─ utils/
+├─ __init__.py
+├─ .env                          # Environment variables (includes Google OAuth + app settings)
+├─ backend.py                    # App factory / FastAPI-Flask backend entry (imports routes, services)
+├─ model_download.py             # Model downloader (Llama-3.1-8B-instruct-GGUF)
+├─ requirements.txt
+└─ start.py                      # Startup script
 ```
 
 <br>
 
-#### 3. Backend process function  
+#### 1. Model Download 
 
-(```app\brave_main_delegate.cc``` - Lines 237-286) 
+- First time running the backend, run the model downloader first. This will download the Llama 3.1-8B-Instruct model.
 
 ```
-std::string process_type = command_line->GetSwitchValueASCII(switches::kProcessType);
-
-#....
-
-#endif
-
+# cd foom_backend
+python model_download.py
 ```
 
 <br>
 
-#### 4. Maintain backend
+#### 2. Set Up Gemini API keys  
 
-PostMainMessageLoopRun() function  (```app\brave_main_delegate.cc``` - Lines 292-305) 
-
-```
-void BraveMainDelegate::PostMainMessageLoopRun(){
-    ...
-}
+ - Set GOOGLE_API_KEY= in the .env file to your API key.
 
 ```
+GOOGLE_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+<br>
+
+#### 3. Start foom backend  
+
+For starting backend, use start.py, this will start a fastapi process
+
+```
+python start.py
+```
+
+<br>

@@ -82,35 +82,20 @@ npm start -- --enable-logging=stderr
 
 ```
 # Create a new virtual environment (Python 3.12 is required)
-# Windows (PowerShell)
-python -m venv .venv
-
-# macOS/Linux
-python3.12 -m venv .venv
-
+python -m venv .venv            # Windows (PowerShell)
+python3.12 -m venv .venv        # macOS/Linux
 
 
 # Activate the environment
-# Windows (PowerShell)
-.\.venv\Scripts\Activate.ps1
-
-# Windows (CMD)
-.\.venv\Scripts\activate.bat
-
-# macOS/Linux (bash/zsh)
-source .venv/bin/activate
-
-
+.\.venv\Scripts\Activate.ps1    # Windows (PowerShell)
+.\.venv\Scripts\activate.bat    # Windows (CMD)
+source .venv/bin/activate       # macOS/Linux (bash/zsh)
 
 # Navigate to the backend directory
 cd foom_backend
 
-
-
 # Install dependencies
 pip install --no-cache-dir -r requirements.txt
-
-
 
 # Install Playwright browser binaries (Chromium)
 playwright install chromium --with-deps --no-shell
@@ -119,28 +104,5 @@ playwright install chromium --with-deps --no-shell
 Notes:
 - Ensure you are using Python 3.12 for the virtual environment.
 - On macOS/Linux, you may need to use python3.12 and pip3.12 if python points to another version.
-
-### File Structure
-
-After you finish Brave compiling and Blackbird SDK installation, structure your files like this:
-
-** will be changed later **
-
-```
-project_root/
-├── src/                  # Source code directory
-│   └── out/              # Output/build directory
-│       └── Component/    # Components folder
-│           └── black_bird/  # Blackbird-specific folder
-│               ├── blackbird_sdk/  # Main Blackbird SDK location
-│               │   ├── __init__.py     
-│               │   ├── backends/        
-│               │   └── requirements.txt     
-│               └── venv/               # Virtual environment folder
-│                   ├── .env            
-│                   ├── bin/            
-│                   └── Lib/            
-└── other_folders/        # Other project folders (e.g., docs, tests)
-```
 
 
