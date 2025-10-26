@@ -346,6 +346,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#4-file-updates-1026" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. File updates 10.26
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -444,6 +453,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#4-file-updates-1026" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. File updates 10.26
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -507,6 +525,39 @@ GEMINI_MODEL=gemini-2.5-flash
 <pre><code>python start.py
 </code></pre>
 <p><br></p>
+<h4 id="4-file-updates-1026">4. File updates 10.26</h4>
+<p>Change http to https, add two certs:</p>
+<pre><code>certs\localhost+2-key.pem
+certs\localhost+2.pem
+</code></pre>
+<p>Add new CORs and use new model Gemma 3 4B</p>
+<pre><code>foom_backend\.env
+</code></pre>
+<p>Modify CDP Monitor page translation, will try to use web translation entry first:</p>
+<pre><code>foom_backend\page_monitor\cdp_monitor.py
+foom_backend\page_monitor\translate_page.py
+</code></pre>
+<p>Demo heyfoom.com backend:</p>
+<pre><code>foom_backend\workers
+</code></pre>
+<p>Agentic seek add Flight and Hotel domain judge:</p>
+<pre><code>foom_backend\web_operator\agentic_seek\agenticseek_runner.py
+foom_backend\web_operator\agentic_seek\sources\router.py
+foom_backend\web_operator\agentic_seek\sources\agents\flight_agent.py
+foom_backend\web_operator\agentic_seek\sources\agents\hotel_agent.py
+
+# Unique route for AS
+foom_backend\routes\flight_route.py
+foom_backend\routes\hotel_route.py
+</code></pre>
+<p>New Frontend AI assistant UI (The same in brave):</p>
+<pre><code>foom_backend\frontend\foom_ui_v3.html
+foom_backend\frontend\search_page.html
+</code></pre>
+<p>Start and import:</p>
+<pre><code>foom_backend\backend.py     # Enable import in parallization
+foom_backend\start.py       # Apply certs (Use docker compose, read its inner env, but need to be changed in MacOS)
+</code></pre>
 
 
 

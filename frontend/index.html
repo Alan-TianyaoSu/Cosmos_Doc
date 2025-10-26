@@ -402,6 +402,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#8-file-updates-1026" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. File updates 10.26
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -514,6 +523,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#8-file-updates-1026" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. File updates 10.26
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -619,6 +637,73 @@ void BlackBirdView::OnSendPressed() {
 void BlackBirdView::LaunchWebFetchWindow(const std::string&amp; json_str) {
     ...
 }
+</code></pre>
+<h4 id="8-file-updates-1026">8. File updates 10.26</h4>
+<p>For brave branding remove:</p>
+<pre><code>
+app/brave_strings.grd                           # Line 287-400, change all the &quot;Brave&quot; to be &quot;Foom&quot; ctrl + f replace all
+chromium_src/chrome/installer/mini_installer    # Create New uuid
+app\brave_exe.rc                                # Change all the &quot;Brave&quot; to be &quot;Foom&quot; ctrl + f replace all
+app\theme\brave\BRANDING                        # Change all the &quot;Brave&quot; to be &quot;Foom&quot; ctrl + f replace all
+app\theme\brave                                 # Change all the png and svg logo with brave log new
+
+app\generated_resources.grd                     # Change &quot;Brave Search&quot; to be &quot;Foom Search&quot;
+app\resources\generated_resources_en-GB.xtb     # Change &quot;Brave Search&quot; to be &quot;Foom Search&quot;
+</code></pre>
+<p><br></p>
+<p>Disable components compiling:</p>
+<pre><code># The best way is to set buildflag to be False
+components\brave_education\buildflags.gni    
+
+# Haven't disable yet, in latest brave, this can be disabled together with AI Chat
+components\ai_rewriter\common\buildflags\buildflags.gni
+
+components\brave_vpn\common\buildflags\buildflags.gni
+</code></pre>
+<p><br></p>
+<p>How to change the homepage AKA new tabe page (NTP)</p>
+<pre><code># Only use the new fresh page, change this in ui controller
+browser\ui\webui\brave_web_ui_controller_factory.cc         # Line 865, in this file, you will see this again
+
+# Fresh ui Location
+browser\resources\brave_new_tab_page_refresh
+
+# Need to install all the dependency for react
+brave/package.json              # Add all the package first
+generate_npm_readmes.mjs        # Use this script in replace package, this will create signature for missing package
+
+# Main change is Disable Brave components eg. brave rewards, enable agenticseek, and set a new UI 
+browser\resources\brave_new_tab_page_refresh\brave_new_tab_page.tsx     # Main logic entrance
+
+browser\resources\brave_new_tab_page_refresh\components\flight-pages    # Flight booking
+browser\resources\brave_new_tab_page_refresh\components\hotel-pages     # Hotel booking
+browser\resources\brave_new_tab_page_refresh\components\ui              # New UI Components, eg. side panel
+browser\resources\brave_new_tab_page_refresh\components\app.tsx         # Main components layout changes
+
+# Main problem: chrome will block request sending from NTP
+browser\ui\webui\brave_new_tab_page_refresh\new_tab_page_initializer.cc # Enable override domain
+
+# Solve the problem fetch make the whole browser crash
+browser\extensions\brave_extensions_browser_client_impl.cc
+browser\extensions\brave_extensions_browser_client_impl.h
+
+# Function reload, enable fetch
+browser\brave_content_browser_client.cc
+browser\brave_content_browser_client.h
+</code></pre>
+<p><br>
+How to redirect to inner HTML template when going to heyfoom.com</p>
+<pre><code># Block request and send a new template
+browser\brave_content_browser_client.cc
+brave/browser/ui/webui/brave_web_ui_controller_factory.cc
+</code></pre>
+<p><br></p>
+<p>New better UI:</p>
+<pre><code>browser\brave_browser_main_extra_parts.cc
+</code></pre>
+<p><br>
+And for all the request sending to the backend now, please use "https" instead of "http"</p>
+<pre><code>https//localhost:5022/
 </code></pre>
 
 
